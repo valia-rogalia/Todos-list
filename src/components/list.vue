@@ -4,7 +4,8 @@
 
     <ul class="list">
       <li class="list__item"
-          v-for="(item,index) in sortDeals"
+          v-for="(item,index) in this.$store.state.deals_list"
+          v-show="active_filter == 'All' || (active_filter == 'Completed' && item.checked == true) || (active_filter == 'Uncompleted' && item.checked == false)"
           v-bind:key="index">
         <input type="checkbox"
                class="list__checkbox"
@@ -41,32 +42,6 @@ export default {
       "active_filter": "All",
       "filters_array": ["All","Completed","Uncompleted"],
       "state": this.$store.state
-    }
-  },
-
-  computed: {
-    sortDeals: function() {
-      let sortDeals = [];
-
-      switch (this._data.active_filter) {
-        case "All":
-          sortDeals = this.$store.state.deals_list;
-          break;
-
-        case "Completed":
-          sortDeals = this.$store.state.deals_list.filter((item) => {
-                        return item.checked == true;
-                      });
-          break;
-
-        case "Uncompleted":
-          sortDeals = this.$store.state.deals_list.filter((item) =>{
-                        return item.checked == false;
-                      });
-          break;
-      }
-
-      return sortDeals;
     }
   },
 

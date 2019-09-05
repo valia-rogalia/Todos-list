@@ -37,7 +37,7 @@ export default {
       });
 
       completed_percent = completed_count / this.$store.state.deals_list.length * 100
-      return completed_percent;
+      return Math.round(completed_percent);
     }
   },
 
